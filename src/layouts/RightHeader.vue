@@ -7,15 +7,29 @@
         :size="'24px'"
       />
     </q-btn>
-    <button :class="'RH__login-button'">
+    <q-btn :class="'RH__login-button'">
       <q-icon :name="mdiAccountCircle" :size="'24px'" />
       {{ '로그인' }}
-    </button>
+    </q-btn>
+
+    <q-btn round flat dense @click="changeTheme">
+      <q-icon :size="'24px'" :color="$q.dark.isActive ? 'white' : 'dark'">
+        <NightIcon />
+      </q-icon>
+    </q-btn>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { mdiDotsVertical, mdiAccountCircle } from '@quasar/extras/mdi-v7';
+import { useQuasar } from 'quasar';
+import NightIcon from 'src/layouts/NightIcon.vue';
+
+const $q = useQuasar();
+
+const changeTheme = () => {
+  $q.dark.toggle();
+};
 </script>
 
 <style lang="scss">
@@ -27,6 +41,7 @@ import { mdiDotsVertical, mdiAccountCircle } from '@quasar/extras/mdi-v7';
     align-content: center;
     justify-content: flex-end;
     justify-items: flex-end;
+    gap: 0.5rem;
   }
 
   &__login-button {

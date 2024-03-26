@@ -2,7 +2,7 @@
   <div :class="'Y__thumbnail-container'">
     <img
       :src="props.thumbnail_url"
-      :style="'width:100%; border-radius:1rem;'"
+      :style="'width:100%; border-radius:1rem; max-height:200px;'"
     />
 
     <div :class="'Y__thumbnail-footer'">

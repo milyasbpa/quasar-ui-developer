@@ -24,8 +24,6 @@
           </q-btn>
         </div>
 
-        <button @click="changeTheme">change Theme</button>
-
         <q-space />
 
         <AutocompleteSearch />
@@ -90,10 +88,6 @@ defineOptions({
 });
 
 const $q = useQuasar();
-
-const changeTheme = () => {
-  $q.dark.toggle();
-};
 
 watch(
   () => $q.dark.isActive,
