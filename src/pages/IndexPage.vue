@@ -3,9 +3,7 @@
     class="row items-start justify-start q-px-lg q-py-lg"
     :style="'max-width:100%;'"
   >
-    <div
-      :style="'display:grid;grid-template-columns:repeat(4,1fr); place-content:start; place-items-start;width:100%;gap:1rem;'"
-    >
+    <div :style="'IP__container'">
       <VideoThumbnail
         v-for="(thumbnail, index) in thumbnailList"
         :key="index"
@@ -88,3 +86,16 @@ const thumbnailList = ref<ThumbnailProps[]>([
   },
 ]);
 </script>
+
+<style lang="scss" module>
+.IP {
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-content: start;
+    place-items: start;
+    width: 100%;
+    gap: 1rem;
+  }
+}
+</style>

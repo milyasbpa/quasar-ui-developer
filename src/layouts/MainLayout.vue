@@ -40,24 +40,32 @@
       <q-scroll-area class="fit">
         <q-list padding>
           <q-item v-for="link in links1" :key="link.text" v-ripple clickable>
-            <q-item-section avatar :class="'justify-center'">
-              <q-icon color="grey" :name="link.icon" />
-              <span v-if="!leftDrawerOpen">{{ link.text }}</span>
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
-            </q-item-section>
+            <div
+              :class="
+                leftDrawerOpen
+                  ? 'ML__drawer-item--open'
+                  : 'ML__drawer-item--closed'
+              "
+            >
+              <q-icon color="grey" :name="link.icon" :size="'24px'" />
+
+              {{ link.text }}
+            </div>
           </q-item>
 
           <q-separator class="q-my-md" />
 
           <q-item v-for="link in links2" :key="link.text" v-ripple clickable>
-            <q-item-section avatar>
-              <q-icon color="grey" :name="link.icon" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
-            </q-item-section>
+            <div
+              :class="
+                leftDrawerOpen
+                  ? 'ML__drawer-item--open'
+                  : 'ML__drawer-item--closed'
+              "
+            >
+              <q-icon color="grey" :name="link.icon" :size="'24px'" />
+              {{ link.text }}
+            </div>
           </q-item>
         </q-list>
       </q-scroll-area>
@@ -111,4 +119,29 @@ function toggleLeftDrawer() {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.ML {
+  &__drawer-item {
+    &--open {
+      display: grid;
+      grid-auto-flow: column;
+      gap: 1rem;
+      width: 100%;
+      align-items: center;
+      align-content: center;
+      justify-content: flex-start;
+      justify-items: flex-start;
+    }
+    &--closed {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      width: 100%;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
+      justify-items: center;
+    }
+  }
+}
+</style>
