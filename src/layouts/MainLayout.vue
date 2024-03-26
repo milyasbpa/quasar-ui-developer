@@ -32,7 +32,7 @@
 
         <q-space />
 
-        <AutocompleteSearch />
+        <AutocompleteSearch v-if="!$q.screen.lt.sm" />
 
         <q-space />
 

@@ -1,5 +1,12 @@
 <template>
   <div :class="'RH__container'">
+    <!-- <q-btn v-if="$q.screen.lt.sm" round flat>
+      <q-icon
+        :name="matSearch"
+        :color="$q.dark.isActive ? 'white' : 'dark'"
+        :size="'24px'"
+      />
+    </q-btn> -->
     <q-btn round flat>
       <q-icon
         :name="mdiDotsVertical"
@@ -21,6 +28,7 @@
 </template>
 
 <script lang="ts" setup>
+// import { matSearch } from '@quasar/extras/material-icons';
 import { mdiDotsVertical, mdiAccountCircle } from '@quasar/extras/mdi-v7';
 import { useQuasar } from 'quasar';
 import NightIcon from 'src/layouts/NightIcon.vue';
