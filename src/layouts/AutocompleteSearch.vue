@@ -2,7 +2,10 @@
   <div class="YL__toolbar-input-container">
     <div :class="'YL__toolbar-autocomplete-container'">
       <div :class="'YL__toolbar-text-input-container'">
-        <div class="YL__toolbar-input-box">
+        <div
+          class="YL__toolbar-input-box"
+          :style="$q.screen.lt.sm ? 'width:100%;' : 'width:500px;'"
+        >
           <q-input
             borderless
             dense
@@ -174,7 +177,6 @@ const lists = ref([
     border-radius: 40px 0px 0px 40px;
     border: 1px solid #ccc;
     max-width: 500px;
-    width: 100%;
   }
   &__toolbar-input {
     width: 100%;
