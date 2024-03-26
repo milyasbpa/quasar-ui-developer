@@ -1,6 +1,31 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header
+      v-if="autocompleteMobile"
+      elevated
+      :class="`${
+        $q.dark.isActive ? 'bg-dark' : 'bg-white'
+      } q-py-xs row items-center`"
+      :style="'height:56px;'"
+    >
+      <q-btn
+        flat
+        dense
+        round
+        :class="'q-pr-sm'"
+        @click="handleCloseAutocompleteMobile"
+      >
+        <q-icon
+          :name="matArrowBack"
+          :color="$q.dark.isActive ? 'white' : 'dark'"
+          :size="'24px'"
+        />
+      </q-btn>
+
+      <AutocompleteSearch />
+    </q-header>
+    <q-header
+      v-if="!autocompleteMobile"
       elevated
       :class="`${
         $q.dark.isActive ? 'bg-dark' : 'bg-white'
@@ -36,7 +61,21 @@
 
         <q-space />
 
-        <RightHeader />
+        <div :class="'ML__right-header-container'">
+          <q-btn
+            v-if="$q.screen.lt.sm"
+            round
+            flat
+            @click="handleOpenAutocompleteMobile"
+          >
+            <q-icon
+              :name="matSearch"
+              :color="$q.dark.isActive ? 'white' : 'dark'"
+              :size="'24px'"
+            />
+          </q-btn>
+          <RightHeader />
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -127,7 +166,11 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { matMenu } from '@quasar/extras/material-icons';
+import {
+  matMenu,
+  matSearch,
+  matArrowBack,
+} from '@quasar/extras/material-icons';
 import { useQuasar } from 'quasar';
 import YoutubeIcon from 'src/layouts/YoutubeIcon.vue';
 import AutocompleteSearch from 'src/layouts/AutocompleteSearch.vue';
@@ -151,13 +194,6 @@ watch(
   }
 );
 
-watch(
-  () => $q.screen.sizes.sm,
-  (val) => {
-    console.log(val ? 'Mobile' : 'Desktop');
-  }
-);
-
 const links1 = [
   { icon: 'home', text: '홈' },
   { icon: 'short', text: 'Shorts' },
@@ -171,17 +207,31 @@ const links2 = [
 const leftDrawerOpen = ref(false);
 
 function toggleLeftDrawer() {
-  console.log('ini kepanggil ga');
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 
 const leftMiniOpen = ref(false);
 
 function toggleMiniDrawer() {
-  console.log($q.screen.lt.sm, 'ini kepanggil ga');
-
   leftMiniOpen.value = !leftMiniOpen.value;
 }
+
+const autocompleteMobile = ref(false);
+
+function handleOpenAutocompleteMobile() {
+  autocompleteMobile.value = true;
+}
+
+function handleCloseAutocompleteMobile() {
+  autocompleteMobile.value = false;
+}
+
+watch(
+  () => $q.screen.sizes.sm,
+  () => {
+    autocompleteMobile.value = false;
+  }
+);
 </script>
 
 <style lang="scss">
@@ -207,6 +257,15 @@ function toggleMiniDrawer() {
       justify-content: center;
       justify-items: center;
     }
+  }
+  &__right-header-container {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-end;
+    justify-items: flex-end;
+    gap: 0.5rem;
   }
 }
 </style>

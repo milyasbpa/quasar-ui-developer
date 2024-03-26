@@ -173,7 +173,8 @@ const lists = ref([
     padding: 0px 4px 0px 16px;
     border-radius: 40px 0px 0px 40px;
     border: 1px solid #ccc;
-    width: 500px;
+    max-width: 500px;
+    width: 100%;
   }
   &__toolbar-input {
     width: 100%;
