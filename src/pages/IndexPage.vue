@@ -3,11 +3,11 @@
     class="row items-start justify-start q-px-lg q-py-lg"
     :style="'max-width:100%;'"
   >
-    <div class="row">
+    <div class="row q-col-gutter-lg">
       <div
         v-for="(thumbnail, index) in thumbnailList"
         :key="index"
-        class="col-12 col-sm-4 col-md-3 q-px-xs"
+        class="col-12 col-sm-4 col-md-3"
       >
         <VideoThumbnail
           :thumbnail_url="thumbnail.thumbnail_url"

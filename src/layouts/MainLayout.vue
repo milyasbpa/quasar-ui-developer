@@ -12,7 +12,13 @@
           :class="'row-auto items-center content-center justify-start justify-items-start'"
           :style="'gap:10px;'"
         >
-          <q-btn flat dense round aria-label="Menu" @click="toggleLeftDrawer">
+          <q-btn
+            flat
+            dense
+            round
+            aria-label="Menu"
+            @click="$q.screen.lt.sm ? toggleLeftDrawer() : toggleMiniDrawer()"
+          >
             <q-icon
               :name="matMenu"
               :color="$q.dark.isActive ? 'white' : 'dark'"
@@ -34,13 +40,42 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer show-if-above :mini="!leftDrawerOpen" bordered>
+    <q-drawer
+      v-model="leftDrawerOpen"
+      show-if-above
+      :mini="$q.screen.lt.sm ? false : !leftMiniOpen"
+      bordered
+    >
+      <div
+        v-if="$q.screen.lt.sm"
+        :class="'row-auto items-center content-center justify-start justify-items-start q-px-sm'"
+        :style="'gap:10px;'"
+      >
+        <q-btn
+          flat
+          dense
+          round
+          aria-label="Menu"
+          @click="$q.screen.lt.sm ? toggleLeftDrawer() : toggleMiniDrawer()"
+        >
+          <q-icon
+            :name="matMenu"
+            :color="$q.dark.isActive ? 'white' : 'dark'"
+            :size="'24px'"
+          />
+        </q-btn>
+        <q-btn :href="'/'" flat no-caps no-wrap class="q-ml-xs">
+          <YoutubeIcon :style="'width:90px; height:20px;'" />
+        </q-btn>
+      </div>
       <q-scroll-area class="fit">
         <q-list padding>
           <q-item v-for="link in links1" :key="link.text" v-ripple clickable>
             <div
               :class="
-                leftDrawerOpen
+                $q.screen.lt.sm
+                  ? 'ML__drawer-item--open'
+                  : leftMiniOpen
                   ? 'ML__drawer-item--open'
                   : 'ML__drawer-item--closed'
               "
@@ -63,7 +98,9 @@
           <q-item v-for="link in links2" :key="link.text" v-ripple clickable>
             <div
               :class="
-                leftDrawerOpen
+                $q.screen.lt.sm
+                  ? 'ML__drawer-item--open'
+                  : leftMiniOpen
                   ? 'ML__drawer-item--open'
                   : 'ML__drawer-item--closed'
               "
@@ -114,6 +151,13 @@ watch(
   }
 );
 
+watch(
+  () => $q.screen.sizes.sm,
+  (val) => {
+    console.log(val ? 'Mobile' : 'Desktop');
+  }
+);
+
 const links1 = [
   { icon: 'home', text: '홈' },
   { icon: 'short', text: 'Shorts' },
@@ -127,7 +171,16 @@ const links2 = [
 const leftDrawerOpen = ref(false);
 
 function toggleLeftDrawer() {
+  console.log('ini kepanggil ga');
   leftDrawerOpen.value = !leftDrawerOpen.value;
+}
+
+const leftMiniOpen = ref(false);
+
+function toggleMiniDrawer() {
+  console.log($q.screen.lt.sm, 'ini kepanggil ga');
+
+  leftMiniOpen.value = !leftMiniOpen.value;
 }
 </script>
 
