@@ -1,7 +1,11 @@
 <template>
   <div :class="'RH__container'">
     <q-btn round flat>
-      <q-icon :name="mdiDotsVertical" :color="'dark'" :size="'24px'" />
+      <q-icon
+        :name="mdiDotsVertical"
+        :color="$q.dark.isActive ? 'white' : 'dark'"
+        :size="'24px'"
+      />
     </q-btn>
     <button :class="'RH__login-button'">
       <q-icon :name="mdiAccountCircle" :size="'24px'" />
