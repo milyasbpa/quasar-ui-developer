@@ -45,7 +45,14 @@
                   : 'ML__drawer-item--closed'
               "
             >
-              <q-icon color="grey" :name="link.icon" :size="'24px'" />
+              <q-icon
+                :color="$q.dark.isActive ? 'white' : 'dark'"
+                :size="'24px'"
+              >
+                <HomeIcon v-if="link.icon === 'home'" />
+                <ShortIcon v-if="link.icon === 'short'" />
+                <SubscriptionIcon v-if="link.icon === 'subscription'" />
+              </q-icon>
 
               {{ link.text }}
             </div>
@@ -61,7 +68,13 @@
                   : 'ML__drawer-item--closed'
               "
             >
-              <q-icon color="grey" :name="link.icon" :size="'24px'" />
+              <q-icon
+                :color="$q.dark.isActive ? 'white' : 'dark'"
+                :size="'24px'"
+              >
+                <YouIcon v-if="link.icon === 'you'" />
+                <HistoryIcon v-if="link.icon === 'history'" />
+              </q-icon>
               {{ link.text }}
             </div>
           </q-item>
@@ -82,6 +95,11 @@ import { useQuasar } from 'quasar';
 import YoutubeIcon from 'src/layouts/YoutubeIcon.vue';
 import AutocompleteSearch from 'src/layouts/AutocompleteSearch.vue';
 import RightHeader from 'src/layouts/RightHeader.vue';
+import ShortIcon from 'src/layouts/ShortIcon.vue';
+import HomeIcon from 'src/layouts/HomeIcon.vue';
+import SubscriptionIcon from 'src/layouts/SubscriptionIcon.vue';
+import YouIcon from 'src/layouts/YouIcon.vue';
+import HistoryIcon from 'src/layouts/HistoryIcon.vue';
 
 defineOptions({
   name: 'MainLayout',
@@ -98,12 +116,12 @@ watch(
 
 const links1 = [
   { icon: 'home', text: '홈' },
-  { icon: 'whatshot', text: 'Shorts' },
-  { icon: 'subscriptions', text: '구독' },
+  { icon: 'short', text: 'Shorts' },
+  { icon: 'subscription', text: '구독' },
 ];
 const links2 = [
-  { icon: 'folder', text: '나' },
-  { icon: 'restore', text: '시청 기록' },
+  { icon: 'you', text: '나' },
+  { icon: 'history', text: '시청 기록' },
 ];
 
 const leftDrawerOpen = ref(false);
