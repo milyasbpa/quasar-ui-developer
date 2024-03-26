@@ -1,6 +1,6 @@
 <template>
   <div :class="'RH__container'">
-    <q-btn round flat>
+    <q-btn round flat v-if="$q.screen.sm">
       <q-icon
         :name="mdiDotsVertical"
         :color="$q.dark.isActive ? 'white' : 'dark'"
