@@ -44,14 +44,18 @@
               item.name.toLowerCase().includes(search.toLowerCase())
             )"
             :key="index"
-            :class="'YL__toolbar-dropwdown-item'"
+            :class="`YL__toolbar-dropdown-item`"
+            @click="() => handleClickItem(list)"
           >
             <q-icon
               :name="matSearch"
               :color="$q.dark.isActive ? 'white' : 'dark'"
               :size="'24px'"
             />
-            {{ list.name }}
+
+            <span :class="$q.dark.isActive ? 'text-white' : 'text-dark'">{{
+              list.name
+            }}</span>
           </div>
         </div>
       </div>
@@ -93,6 +97,10 @@ const handleFocus = () => {
 
 const handleBlur = () => {
   isFocus.value = false;
+};
+
+const handleClickItem = (data: { id: string; name: string }) => {
+  search.value = data.name;
 };
 
 const lists = ref([
@@ -145,6 +153,8 @@ const lists = ref([
     align-content: center;
     justify-items: flex-start;
     justify-content: flex-start;
+    cursor: pointer;
+    width: 100%;
   }
   &__toolbar-input-container {
     display: grid;
