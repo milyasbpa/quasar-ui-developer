@@ -3,16 +3,20 @@
     class="row items-start justify-start q-px-lg q-py-lg"
     :style="'max-width:100%;'"
   >
-    <div :class="'IP__container'">
-      <VideoThumbnail
+    <div class="row">
+      <div
         v-for="(thumbnail, index) in thumbnailList"
         :key="index"
-        :thumbnail_url="thumbnail.thumbnail_url"
-        :avatar_url="thumbnail.avatar_url"
-        :title="thumbnail.title"
-        :author="thumbnail.author"
-        :views="thumbnail.views"
-      />
+        class="col-12 col-sm-4 col-md-3 q-px-xs"
+      >
+        <VideoThumbnail
+          :thumbnail_url="thumbnail.thumbnail_url"
+          :avatar_url="thumbnail.avatar_url"
+          :title="thumbnail.title"
+          :author="thumbnail.author"
+          :views="thumbnail.views"
+        />
+      </div>
     </div>
   </q-page>
 </template>
